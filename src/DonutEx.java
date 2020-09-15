@@ -15,31 +15,29 @@ class Surface extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private void doDrawing(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g.create();
 
-        Graphics2D g2d = (Graphics2D) g.create();
+		Dimension size = getSize();
+		double w = size.getWidth();
+		double h = size.getHeight();
 
-        Dimension size = getSize();
-        double w = size.getWidth();
-        double h = size.getHeight();
+		Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
+		g2d.setStroke(new BasicStroke(2));
+		g2d.setPaint(Color.pink);
 
-        Ellipse2D e = new Ellipse2D.Double(0, 0, 80, 130);
-        g2d.setStroke(new BasicStroke(1));
-        g2d.setPaint(Color.gray);
+		for (double deg = 0; deg < 360; deg += 10) {
+			AffineTransform at = AffineTransform.getTranslateInstance(w / 2, h / 2);
+			at.rotate(Math.toRadians(deg));
+			g2d.draw(at.createTransformedShape(e));
+		}
+	}
 
-        for (double deg = 0; deg < 360; deg += 5) {
-            AffineTransform at =
-                    AffineTransform.getTranslateInstance(w / 2, h / 2);
-            at.rotate(Math.toRadians(deg));
-            g2d.draw(at.createTransformedShape(e));
-        }
-    }
+	@Override
+	public void paintComponent(Graphics g) {
 
-    @Override
-    public void paintComponent(Graphics g) {
-
-        super.paintComponent(g);
-        doDrawing(g);
-    }
+		super.paintComponent(g);
+		doDrawing(g);
+	}
 }
 
 public class DonutEx extends JFrame {
@@ -48,28 +46,24 @@ public class DonutEx extends JFrame {
 
 	public DonutEx() {
 
-        initUI();
-    }
+		initUI();
+	}
 
-    private void initUI() {
+	private void initUI() {
+		add(new Surface());
+		setTitle("Donut");
+		setSize(370, 320);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
-        add(new Surface());
-
-        setTitle("Donut");
-        setSize(370, 320);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public static void main(String[] args) {
-
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-
-                DonutEx ex = new DonutEx();
-                ex.setVisible(true);
-            }
-        });
-    }
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				DonutEx ex = new DonutEx();
+				ex.setVisible(true);
+			}
+		});
+	}
 }
