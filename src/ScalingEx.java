@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 
 class SurfaceScale extends JPanel {
 
-    private void doDrawing(Graphics g) {
+	private static final long serialVersionUID = 1L;
+
+	private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g.create();
 
