@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 class SurfaceTest extends JPanel {
 	private static final long serialVersionUID = 1L;
+
 	private void doDrawing(Graphics g) {
 
 		Graphics2D g2d = (Graphics2D) g.create();
@@ -26,18 +27,14 @@ class SurfaceTest extends JPanel {
 }
 
 public class TranslationEx extends JFrame {
-
 	private static final long serialVersionUID = 1L;
 
 	public TranslationEx() {
-
 		initUI();
 	}
 
 	private void initUI() {
-
-		add(new SurfaceTest());
-
+		//add(new SurfaceTest());
 		setTitle("Translation");
 		setSize(300, 200);
 		setLocationRelativeTo(null);
